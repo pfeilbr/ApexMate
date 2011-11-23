@@ -5,14 +5,19 @@
 	<key>beforeRunningCommand</key>
 	<string>saveActiveFile</string>
 	<key>command</key>
-	<string>"$TM_BUNDLE_SUPPORT/bin/apexLoader.app/Contents/MacOS/apexLoader" runTests "$TM_SELECTED_TEXT"</string>
+	<string>"$TM_BUNDLE_SUPPORT/bin/sf.rb" compileTrigger
+#"$TM_BUNDLE_SUPPORT/bin/apexLoader.app/Contents/MacOS/apexLoader" trigger "$TM_FILEPATH"</string>
 	<key>input</key>
 	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>@C</string>
 	<key>name</key>
-	<string>Run Tests</string>
+	<string>Compile Trigger</string>
 	<key>output</key>
 	<string>showAsHTML</string>
+	<key>scope</key>
+	<string>source.apex</string>
 	<key>uuid</key>
-	<string>F5A6E83D-6A06-41F2-AAA2-B4C2A0AADC49</string>
+	<string>E7F46294-6063-4EE7-BA26-3FDE4CBFD518</string>
 </dict>
 </plist>

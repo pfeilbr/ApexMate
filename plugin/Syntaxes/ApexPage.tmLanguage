@@ -24,6 +24,8 @@
 		|\{\{?/(if|foreach|capture|literal|foreach|php|section|strip)
 		|^[^{]*\}
 		)</string>
+	<key>keyEquivalent</key>
+	<string>^~A</string>
 	<key>name</key>
 	<string>ApexPage</string>
 	<key>patterns</key>

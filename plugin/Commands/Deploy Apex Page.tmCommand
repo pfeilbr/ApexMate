@@ -5,13 +5,18 @@
 	<key>beforeRunningCommand</key>
 	<string>saveActiveFile</string>
 	<key>command</key>
-	<string>"$TM_BUNDLE_SUPPORT/bin/apexLoader.app/Contents/MacOS/apexLoader" apexpage "$TM_FILEPATH"</string>
+	<string>"$TM_BUNDLE_SUPPORT/bin/sf.rb" deployApexPage
+#"$TM_BUNDLE_SUPPORT/bin/apexLoader.app/Contents/MacOS/apexLoader" apexpage "$TM_FILEPATH"</string>
 	<key>input</key>
 	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>@r</string>
 	<key>name</key>
 	<string>Deploy Apex Page</string>
 	<key>output</key>
 	<string>showAsHTML</string>
+	<key>scope</key>
+	<string>text.html.apexpage</string>
 	<key>uuid</key>
 	<string>7790AEF2-2FE8-4EAA-B5B2-50C0CFBF9CEB</string>
 </dict>

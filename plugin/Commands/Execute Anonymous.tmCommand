@@ -5,16 +5,21 @@
 	<key>beforeRunningCommand</key>
 	<string>saveActiveFile</string>
 	<key>command</key>
-	<string>"$TM_BUNDLE_SUPPORT/bin/apexLoader.app/Contents/MacOS/apexLoader" execAnon "$TM_FILEPATH"
+	<string>"$TM_BUNDLE_SUPPORT/bin/sf.rb" executeAnonymous "$TM_FILEPATH"
+# "$TM_BUNDLE_SUPPORT/bin/apexLoader.app/Contents/MacOS/apexLoader" execAnon "$TM_FILEPATH"
 </string>
 	<key>fallbackInput</key>
 	<string>document</string>
 	<key>input</key>
 	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>@r</string>
 	<key>name</key>
 	<string>Execute Anonymous</string>
 	<key>output</key>
 	<string>showAsHTML</string>
+	<key>scope</key>
+	<string>source.apex</string>
 	<key>uuid</key>
 	<string>960EE079-5864-4B17-8E0C-D5225F2AB6E4</string>
 </dict>
