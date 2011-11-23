@@ -52,6 +52,7 @@
 	ZKEnvelope *e = [[[ZKEnvelope alloc] init] autorelease];
 	[e start:@"http://soap.sforce.com/2006/08/apex"];
 	[e writeSessionHeader:[sforce sessionId]];
+    [e writeDebuggingInfo];
 	[e writeCallOptionsHeader:[sforce clientId]];
 	[e moveToBody];
 	[self setEndpointUrl];
@@ -60,13 +61,33 @@
 
 - (NSArray *)sendAndParseResults:(ZKEnvelope *)requestEnv resultType:(Class)resultClass {
 	NSError * err = NULL;
-	NSXMLNode * resRoot = [self sendRequest:[requestEnv end]];
+    NSDictionary *resultsDict = [self sendRequest:[requestEnv end]];
+	NSXMLNode * resRoot = [resultsDict valueForKey:@"responseBody"];
 	NSArray * results = [resRoot nodesForXPath:@"result" error:&err];
 	NSMutableArray *resArr = [NSMutableArray array];
 	NSEnumerator * e = [results objectEnumerator];
 	NSXMLElement *xmle;
 	while (xmle = [e nextObject]) {
 		NSObject *o = [[resultClass alloc] initWithXmlElement:xmle];
+		[resArr addObject:o];
+		[o release];
+	}
+	return resArr;
+}
+
+- (NSArray*)sendExecuteAnonymousAndParseResults:(ZKEnvelope *)requestEnv resultType:(Class)resultClass {
+	NSError * err = NULL;
+    NSDictionary *resultsDict = [self sendRequest:[requestEnv end]];
+	NSXMLNode * resRoot = [resultsDict valueForKey:@"responseBody"];
+	NSArray * results = [resRoot nodesForXPath:@"result" error:&err];
+	NSMutableArray *resArr = [NSMutableArray array];
+	NSEnumerator * e = [results objectEnumerator];
+	NSXMLElement *xmle;
+	while (xmle = [e nextObject]) {
+		NSObject *o = [[resultClass alloc] initWithXmlElement:xmle];
+        if (resultClass == [ZKExecuteAnonymousResult class]) {
+            ((ZKExecuteAnonymousResult*)o).debugLog = [resultsDict valueForKey:@"debugLogString"];
+        }
 		[resArr addObject:o];
 		[o release];
 	}
@@ -96,7 +117,7 @@
 	[env addElement:@"String" elemValue:src];
 	[env endElement:@"executeAnonymous"];
 	[env endElement:@"s:Body"];
-	return [[self sendAndParseResults:env resultType:[ZKExecuteAnonymousResult class]] objectAtIndex:0];
+	return [[self sendExecuteAnonymousAndParseResults:env resultType:[ZKExecuteAnonymousResult class]] objectAtIndex:0];
 }
 
 - (ZKRunTestResult *)runTests:(BOOL)allTests namespace:(NSString *)ns packages:(NSArray *)pkgs {

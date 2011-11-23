@@ -155,6 +155,7 @@
 		else if (![r success]) {
 			[self log:logError msg:[NSString stringWithFormat:@"Exception %@\n%@", [r exceptionMessage], [r exceptionStackTrace]]];
 		} else {
+            [self log:logVerbose msg:r.debugLog];
 			--errCount;
 		}
 	}

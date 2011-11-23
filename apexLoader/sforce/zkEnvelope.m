@@ -52,6 +52,18 @@ enum envState {
 	[self endElement:@"SessionHeader"];
 }
 
+- (void)writeDebuggingInfo {
+	[self moveToHeaders];
+	[self startElement:@"DebuggingInfo"];
+	[self addElement:@"debugLog" elemValue:@"DEBUG"];
+	[self endElement:@"DebuggingInfo"];
+    
+    [self startElement:@"DebuggingHeader"];
+	[self addElement:@"debugLevel" elemValue:@"Debugonly"];
+	[self endElement:@"DebuggingHeader"];    
+}
+
+
 - (void)writeCallOptionsHeader:(NSString *)clientId {
 	if ([clientId length] == 0) return;
 	[self moveToHeaders];

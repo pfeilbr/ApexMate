@@ -23,6 +23,8 @@
 
 @implementation ZKExecuteAnonymousResult
 
+@synthesize debugLog=_debugLog;
+
 - (int)column {
 	return [self integer:@"column"];
 }

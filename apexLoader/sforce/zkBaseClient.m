@@ -29,7 +29,7 @@
 	[super dealloc];
 }
 
-- (NSXMLNode *)sendRequest:(NSString *)payload {
+- (NSDictionary *)sendRequest:(NSString *)payload {
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:endpointUrl]];
 	[request setHTTPMethod:@"POST"];
 	[request addValue:@"text/xml; charset=UTF-8" forHTTPHeaderField:@"content-type"];	
@@ -54,7 +54,23 @@
 		@throw exception;				
 	}	
 	NSXMLNode *body = [[doc nodesForXPath:@"/soapenv:Envelope/soapenv:Body" error:&err] objectAtIndex:0];
-	return [[body children] objectAtIndex:0];
+    
+    NSArray *debugLogNodes = [doc nodesForXPath:@"/soapenv:Envelope/soapenv:Header/DebuggingInfo/debugLog" error:&err];
+    NSXMLNode *debugLog = nil;
+    NSString *debugLogString = @"";
+    if ([debugLogNodes count] > 0) {
+        debugLog = [debugLogNodes objectAtIndex:0];
+        NSArray *debugLogChildren = [debugLog children];
+        
+        if (debugLogChildren) {
+            debugLogString = [[[debugLog children] objectAtIndex:0] stringValue];            
+        }
+    }
+
+    NSDictionary *response = [NSDictionary dictionaryWithObjectsAndKeys:debugLogString, @"debugLogString", [[body children] objectAtIndex:0], @"responseBody", nil];
+    
+    return response;
+	//return [[body children] objectAtIndex:0];
 }
 
 @end

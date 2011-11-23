@@ -137,7 +137,7 @@ static const int SAVE_BATCH_SIZE = 25;
 	NSString *xml = [env end];
 	
 	NSError *err = nil;
-	NSXMLNode *resp = [self sendRequest:xml];	
+	NSXMLNode *resp = [[self sendRequest:xml] valueForKey:@"responseBody"];
 
 	NSXMLNode *serverUrl = [[resp nodesForXPath:@"result/serverUrl" error:&err] objectAtIndex:0];
 	[endpointUrl release];
@@ -194,7 +194,7 @@ static const int SAVE_BATCH_SIZE = 25;
 	[env endElement:@"s:Body"];
 	
 	NSError * err = NULL;
-	NSXMLNode * rr = [self sendRequest:[env end]];
+	NSXMLNode * rr = [[self sendRequest:[env end]] valueForKey:@"responseBody"];
 	NSMutableArray *types = [NSMutableArray array]; 
 	NSArray * results = [rr nodesForXPath:@"result/types" error:&err];
 	NSEnumerator * e = [results objectEnumerator];
@@ -220,7 +220,7 @@ static const int SAVE_BATCH_SIZE = 25;
 	[env endElement:@"s:Body"];
 	
 	NSError *err = 0;
-	NSXMLNode *dr = [self sendRequest:[env end]];
+	NSXMLNode *dr = [[self sendRequest:[env end]] valueForKey:@"responseBody"];
 	NSXMLNode *descResult = [[dr nodesForXPath:@"result" error:&err] objectAtIndex:0];
 	ZKDescribeSObject *desc = [[[ZKDescribeSObject alloc] initWithXmlElement:(NSXMLElement*)descResult] autorelease];
 	[env release];
@@ -239,7 +239,7 @@ static const int SAVE_BATCH_SIZE = 25;
 	[env endElement:@"s:Body"];
 	
 	NSError *err = 0;
-	NSXMLNode *sr = [self sendRequest:[env end]];
+	NSXMLNode *sr = [[self sendRequest:[env end]] valueForKey:@"responseBody"];
 	NSXMLNode *searchResult = [[sr nodesForXPath:@"result" error:&err] objectAtIndex:0];
 	NSArray *records = [searchResult nodesForXPath:@"searchRecords/record" error:&err];
 	NSMutableArray *sobjects = [NSMutableArray array];
@@ -260,7 +260,7 @@ static const int SAVE_BATCH_SIZE = 25;
 	[env endElement:@"s:Body"];
 	
 	NSError *err = 0;
-	NSXMLNode *res = [self sendRequest:[env end]];
+	NSXMLNode *res = [[self sendRequest:[env end]] valueForKey:@"responseBody"];
 	NSXMLNode *timestamp = [[res nodesForXPath:@"result" error:&err] objectAtIndex:0];
 	[env release];
 	return [timestamp stringValue];
@@ -298,7 +298,7 @@ static const int SAVE_BATCH_SIZE = 25;
 	[env endElement:@"s:Body"];
 	
 	NSError *err = NULL;
-	NSXMLNode *cr = [self sendRequest:[env end]];
+	NSXMLNode *cr = [[self sendRequest:[env end]] valueForKey:@"responseBody"];
 	NSArray *resultsArr = [cr nodesForXPath:@"result" error:&err];
 	NSMutableArray *results = [NSMutableArray arrayWithCapacity:[resultsArr count]];
 	for (NSXMLNode *cr in resultsArr) {
@@ -334,7 +334,7 @@ static const int SAVE_BATCH_SIZE = 25;
 	[env endElement:@"s:Body"];
 
 	NSError *err = NULL;
-	NSXMLNode *cr = [self sendRequest:[env end]];
+	NSXMLNode *cr = [[self sendRequest:[env end]] valueForKey:@"responseBody"];
 	NSArray *resultsArr = [cr nodesForXPath:@"result" error:&err];
 	NSMutableArray *results = [NSMutableArray arrayWithCapacity:[resultsArr count]];
 	e = [resultsArr objectEnumerator];
@@ -360,7 +360,7 @@ static const int SAVE_BATCH_SIZE = 25;
 	[env endElement:@"s:Body"];
 	
 	NSError *err = NULL;
-	NSXMLNode *rr = [self sendRequest:[env end]];
+	NSXMLNode *rr = [[self sendRequest:[env end]] valueForKey:@"responseBody"];
 	NSMutableDictionary *sobjects = [NSMutableDictionary dictionary]; 
 	NSArray *results = [rr nodesForXPath:@"result" error:&err];
 	NSEnumerator *e = [results objectEnumerator];
@@ -384,7 +384,7 @@ static const int SAVE_BATCH_SIZE = 25;
 	[env endElement:@"s:Body"];
 	
 	NSError *err = NULL;
-	NSXMLNode *cr = [self sendRequest:[env end]];
+	NSXMLNode *cr = [[self sendRequest:[env end]] valueForKey:@"responseBody"];
 	NSArray *resArr = [cr nodesForXPath:@"result" error:&err];
 	NSMutableArray *results = [NSMutableArray arrayWithCapacity:[resArr count]];
 	NSEnumerator *e = [resArr objectEnumerator];
@@ -407,7 +407,7 @@ static const int SAVE_BATCH_SIZE = 25;
 	[env endElement:operation];
 	[env endElement:@"s:Body"];
 	
-	NSXMLNode *qr = [self sendRequest:[env end]];
+	NSXMLNode *qr = [[self sendRequest:[env end]] valueForKey:@"responseBody"];
 	ZKQueryResult *result = [[ZKQueryResult alloc] initFromXmlNode:[[qr children] objectAtIndex:0]];
 	[env release];
 	return [result autorelease];

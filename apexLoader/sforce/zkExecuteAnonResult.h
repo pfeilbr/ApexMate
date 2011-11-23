@@ -31,6 +31,7 @@
 // <xsd:element name="success" type="xsd:boolean"/>
 
 @interface ZKExecuteAnonymousResult : ZKXmlDeserializer {
+    NSString *_debugLog;
 }
 
 - (int)column;
@@ -40,5 +41,7 @@
 - (NSString *)exceptionMessage;
 - (NSString *)exceptionStackTrace;
 - (BOOL)success;
+
+@property (nonatomic, copy) NSString *debugLog;
 
 @end

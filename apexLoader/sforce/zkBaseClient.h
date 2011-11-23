@@ -27,6 +27,6 @@
 	NSString	*endpointUrl;
 }
 
-- (NSXMLNode *)sendRequest:(NSString *)payload;
+- (NSDictionary *)sendRequest:(NSString *)payload;
 
 @end
