@@ -8,7 +8,7 @@ Fork of the original [superfell/ApexMate](https://github.com/superfell/ApexMate)
 
 ## Bundle Items
 
-![bundle items](http://j.mp/s2uhwd) ![bundle menu items](http://j.mp/rQS25L)
+![bundle items](https://img.skitch.com/20111123-1gcbrycjgeqwe8r4fns6qnc1jj.png) ![bundle menu items](https://img.skitch.com/20111123-degrqb6j9m2i72r5rnkcnbtrn6.png)
 
 ## From [superfell/ApexMate](https://github.com/superfell/ApexMate)
 
